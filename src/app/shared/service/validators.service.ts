@@ -28,5 +28,25 @@ export class ValidatorsService {
       && form.controls[field].touched;
   }
 
+  isFieldOneEqualFielTwo( field1: string, field2: string ) {
+
+    return ( formGroup: FormGroup ): ValidationErrors | null => {
+
+      const fieldValue1 = formGroup.get(field1)?.value;
+      const fieldValue2 = formGroup.get(field2)?.value;
+
+      if( field1 !== field2 ){
+        formGroup.get(field2)?.setErrors({ notEquals: true });
+        return { notEqual: true }
+      }
+
+      formGroup.get(field2)?.setErrors(null);
+
+      return null;
+
+    }
+
+  }
+
 
 }
